@@ -13,7 +13,6 @@
 .h-track {
   display: flex;
   flex-direction: row;
-  gap: 28px;
   height: 100%;
   overflow: visible;
   scroll-behavior: smooth;
@@ -49,6 +48,7 @@
     transform 0.2s ease,
     box-shadow 0.2s ease;
   box-shadow: 3px 3px 0px #1a1a1a;
+  width: 95%;
 }
 
 .h-card::before {
@@ -70,7 +70,7 @@
 }
 
 .h-card--big {
-  height: 70vh;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -80,7 +80,7 @@
 }
 
 .h-card--small {
-  height: calc((70vh - 16px) / 2);
+  height: calc((58vh - 10px) / 2);
 }
 
 .h-col--double .h-card--small:first-child {
@@ -124,7 +124,7 @@
 }
 
 .h-card--small h2 {
-  font-size: 28px;
+  font-size: 40px;
 }
 
 .h-card p {
@@ -190,13 +190,18 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 0 4px 0;
+  padding: 25px 35px;
   font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #1a1a1a;
   flex-shrink: 0;
+  background-color: rgb(240, 235, 224);
+  color: rgb(26, 26, 26);
+  border: 4px solid black;
+  border-radius: 20px;
+  box-shadow: 4px 4px 0px #1a1a1a;
+  width: 32%;
 }
 
 .h-nav-hint span {
