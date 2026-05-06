@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
-/* ── LOCK PAGE HEIGHT so nav never scrolls away ── */
 html,
 body,
 #app {
@@ -18,7 +17,6 @@ body,
   flex-direction: column;
 }
 
-/* ── WOOD FRAME OVERLAY ── */
 .wood-frame {
   position: fixed;
   inset: 0;

@@ -4,7 +4,6 @@ nav {
   justify-content: space-between;
   padding: 4% 24px 0 4%;
   background-color: #f0ebe0;
-  /* Nav is a flex child of #app — it stays fixed at top, page can't scroll */
   flex-shrink: 0;
 }
 

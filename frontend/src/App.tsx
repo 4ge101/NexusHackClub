@@ -4,7 +4,6 @@ import "./app.css";
 
 const App = () => {
   return (
-    // id="app" matches the CSS — flex column, height 100%, overflow hidden
     <div id="app">
       <div className="wood-frame">
         <div className="wood-top" />
