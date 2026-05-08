@@ -66,24 +66,6 @@ const EventsBgIcon = () => (
   </svg>
 );
 
-const HackathonBgIcon = () => (
-  <svg
-    class="card-bg-icon"
-    viewBox="0 0 120 120"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <polygon
-      points="60,10 90,40 80,80 40,80 30,40"
-      fill="#1a1a1a"
-      opacity="0.6"
-    />
-    <circle cx="60" cy="55" r="18" fill="#1a1a1a" />
-    <line x1="60" y1="10" x2="60" y2="37" stroke="#87ceeb" strokeWidth="4" />
-    <line x1="60" y1="73" x2="60" y2="100" stroke="#87ceeb" strokeWidth="4" />
-  </svg>
-);
-
 type BigCard = {
   type: "big";
   id: string;
@@ -132,14 +114,14 @@ const CARDS: CardEntry[] = [
     id: "about-us",
     top: {
       title: "about us",
-      subtitle: "Turning Curiosity into Creation",
+      subtitle: "want to know about us",
       color: "#f5a623",
       textColor: "#1a1a1a",
       icon: ProjectsBgIcon,
     },
     bottom: {
-      title: "events",
-      subtitle: "Build. Compete. Ship.",
+      title: "guides",
+      subtitle: "New to Nexus? We've Got You Covered",
       color: "#7ed321",
       textColor: "#1a1a1a",
       icon: GuidesBgIcon,
@@ -147,26 +129,26 @@ const CARDS: CardEntry[] = [
   },
   {
     type: "big",
-    id: "hackthon",
-    title: "hackthons",
-    subtitle: "No Experience? Just Start Building.",
+    id: "social medias",
+    title: "social medias",
+    subtitle: "Join us in various platforms",
     color: "#87ceeb",
     textColor: "#2c5fa8",
-    icon: HackathonBgIcon,
+    icon: GuidesBgIcon,
   },
   {
     type: "double",
-    id: "guides",
+    id: "blog",
     top: {
-      title: "guides",
-      subtitle: "New to Hackathons? We’ve Got You Covered",
+      title: "blogs",
+      subtitle: "read the blogs here",
       color: "#e8a0f0",
       textColor: "#1a1a1a",
       icon: GuidesBgIcon,
     },
     bottom: {
-      title: "instagram",
-      subtitle: "connect with us",
+      title: "contact",
+      subtitle: "contact us",
       color: "#ffd166",
       textColor: "#1a1a1a",
       icon: ProjectsBgIcon,
