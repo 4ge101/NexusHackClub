@@ -92,7 +92,6 @@
   z-index: 10;
 }
 
-/* Small card hover — only when .h-card--hovered is added individually in TSX */
 .h-card--small.h-card--hovered {
   transform: scale(1.05);
   box-shadow: 7px 7px 0px #1a1a1a;
