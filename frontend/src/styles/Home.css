@@ -84,20 +84,17 @@
   box-shadow: 4px 4px 0px #1a1a1a;
 }
 
-/* Big card hover */
 .h-card--big:hover,
 .h-card--big.h-card--focused {
   transform: scale(1.05);
   box-shadow: 4px 4px 0px #1a1a1a;
   z-index: 10;
 }
-
 .h-card--small.h-card--hovered {
   transform: scale(1.05);
   box-shadow: 7px 7px 0px #1a1a1a;
   z-index: 10;
 }
-
 .h-card h2 {
   font-size: 26px;
   font-weight: 900;
@@ -108,11 +105,9 @@
   position: relative;
   z-index: 1;
 }
-
 .h-card--small h2 {
   font-size: 40px;
 }
-
 .h-card p {
   font-size: 22px;
   font-weight: 800;
@@ -123,7 +118,6 @@
   z-index: 1;
   padding: 20px 0;
 }
-
 .card-bg-icon {
   position: absolute;
   top: 16px;
@@ -134,12 +128,10 @@
   z-index: 0;
   clip-path: inset(0 0 0 0 round 18px);
 }
-
 .h-card--small .card-bg-icon {
   width: 100px;
   height: 100px;
 }
-
 .events-link-btn {
   display: inline-flex;
   align-items: center;
@@ -160,11 +152,9 @@
   position: relative;
   z-index: 1;
 }
-
 .events-link-btn:hover {
   background: rgba(0, 0, 0, 0.06);
 }
-
 .events-link-btn .icon {
   width: 16px;
   height: 16px;
@@ -172,7 +162,6 @@
   border: 1.5px solid currentColor;
   border-radius: 50%;
 }
-
 .h-nav-hint {
   display: flex;
   align-items: center;
@@ -190,11 +179,9 @@
   box-shadow: 4px 4px 0px #1a1a1a;
   width: 34%;
 }
-
 .mouseicon {
   width: 3vw;
 }
-
 .h-nav-hint span {
   display: inline-block;
   border-radius: 6px;
@@ -202,4 +189,10 @@
   font-size: 31px;
   font-weight: 900;
   font-family: "Boldonse", system-ui;
+}
+
+.h-card--social {
+  background-size: auto;
+  background-position: top;
+  overflow: hidden;
 }

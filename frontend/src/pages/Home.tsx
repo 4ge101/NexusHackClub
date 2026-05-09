@@ -3,6 +3,7 @@ import { route } from "preact-router";
 import type { FunctionalComponent, JSX } from "preact";
 import "../styles/Home.css";
 import MouseIcon from "../assets/icons/mouse.svg";
+import BackgroundCardImage from "../assets/images/bg.webp";
 
 const ProjectsBgIcon = () => (
   <svg
@@ -134,11 +135,11 @@ const CARDS: CardEntry[] = [
   },
   {
     type: "big",
-    id: "social medias",
+    id: "social",
     title: "social medias",
     subtitle: "Join us in various platforms",
-    color: "#87ceeb",
-    textColor: "#2c5fa8",
+    color: "transparent",
+    textColor: "#1a1a1a",
     icon: GuidesBgIcon,
     href: "/social",
   },
@@ -179,11 +180,14 @@ const BigCardEl: FunctionalComponent<{ card: BigCard; focused: boolean }> = ({
   focused,
 }) => (
   <div
-    class={`h-card h-card--big${focused ? " h-card--focused" : ""}`}
+    class={`h-card h-card--big${focused ? " h-card--focused" : ""}${card.id === "social" ? " h-card--social" : ""}`}
     style={{
       backgroundColor: card.color,
       color: card.textColor,
       borderColor: card.textColor,
+      ...(card.id === "social" && {
+        backgroundImage: `url(${BackgroundCardImage})`,
+      }),
     }}
     onClick={() => route(card.href)}
   >
@@ -207,7 +211,6 @@ const BigCardEl: FunctionalComponent<{ card: BigCard; focused: boolean }> = ({
   </div>
 );
 
-// Each small card tracks its own hovered state independently
 const SmallCardEl: FunctionalComponent<{ data: DoubleCard["top"] }> = ({
   data,
 }) => {
