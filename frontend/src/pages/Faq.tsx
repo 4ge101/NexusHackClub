@@ -1,5 +1,6 @@
 import type { FunctionalComponent } from "preact";
-import { useState } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
+import { route } from "preact-router";
 import "../styles/Faq.css";
 
 type FaqItem = {
@@ -70,70 +71,118 @@ const FAQS: FaqItem[] = [
 
 const CATEGORIES = ["ALL", ...Array.from(new Set(FAQS.map((f) => f.category)))];
 
+const CATEGORY_COLORS: Record<string, string> = {
+  GENERAL: "#f5a623",
+  EVENTS: "#7ed321",
+  MEMBERSHIP: "#ff6b6b",
+  PROJECTS: "#4ecdc4",
+};
+
 const Faq: FunctionalComponent = () => {
   const [open, setOpen] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState("ALL");
 
-  const filtered = activeCategory === "ALL" ? FAQS : FAQS.filter((f) => f.category === activeCategory);
+  const filtered =
+    activeCategory === "ALL"
+      ? FAQS
+      : FAQS.filter((f) => f.category === activeCategory);
 
   const toggle = (id: string) => setOpen((prev) => (prev === id ? null : id));
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") route("/");
+    };
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   return (
     <div class="fq-viewport">
-      <div class="fq-header">
-        <span class="fq-tag">NEED HELP?</span>
-        <h1 class="fq-title">FAQ</h1>
-        <p class="fq-subtitle">Answers to the questions we hear most often.</p>
+      <div class="a-topbar">
+        <button class="a-back-btn" onClick={() => route("/")}>
+          <span class="a-back-key">ESC</span>
+          <span class="a-back-label">BACK</span>
+        </button>
       </div>
 
-      <div class="fq-filters">
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat}
-            class={`fq-filter-btn${activeCategory === cat ? " fq-filter-btn--active" : ""}`}
-            onClick={() => setActiveCategory(cat)}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+      <div class="fq-layout">
+        <div class="fq-left">
+          <div class="fq-header">
+            <div class="fq-header-top">
+              <span class="fq-tag">NEED HELP?</span>
+              <div class="fq-header-line" />
+            </div>
+            <h1 class="fq-title">FAQ</h1>
+            <p class="fq-subtitle">
+              Answers to the questions we hear most often.
+            </p>
+          </div>
 
-      <div class="fq-list">
-        {filtered.map((item, idx) => {
-          const isOpen = open === item.id;
-          return (
-            <div
-              key={item.id}
-              class={`fq-item${isOpen ? " fq-item--open" : ""}`}
-              style={{ "--delay": `${idx * 0.04}s` } as never}
-            >
-              <button class="fq-question" onClick={() => toggle(item.id)}>
-                <span class="fq-cat-badge">{item.category}</span>
-                <span class="fq-question-text">{item.question}</span>
-                <span class={`fq-chevron${isOpen ? " fq-chevron--open" : ""}`}>
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M4 7l6 6 6-6" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
+          <div class="fq-filters">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                class={`fq-filter-btn${activeCategory === cat ? " fq-filter-btn--active" : ""}`}
+                onClick={() => setActiveCategory(cat)}
+              >
+                {cat}
+                <span class="fq-filter-count">
+                  {cat === "ALL"
+                    ? FAQS.length
+                    : FAQS.filter((f) => f.category === cat).length}
                 </span>
               </button>
-              {isOpen && (
-                <div class="fq-answer">
-                  <p>{item.answer}</p>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      <div class="fq-cta">
-        <div class="fq-cta-inner">
-          <span class="fq-cta-emoji">💬</span>
-          <div>
-            <h3>STILL HAVE QUESTIONS?</h3>
-            <p>Reach out to us directly — we reply within 48 hours.</p>
+            ))}
           </div>
-          <a href="/contact" class="fq-cta-btn">CONTACT US →</a>
+
+          <div class="fq-cta">
+            <div class="fq-cta-inner">
+              <div class="fq-cta-icon">💬</div>
+              <h3>STILL HAVE QUESTIONS?</h3>
+              <p>Reach out to us directly — we reply within 48 hours.</p>
+              <a href="/contact" class="fq-cta-btn">
+                CONTACT US →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="fq-right">
+          <div class="fq-list-header">
+            <span class="fq-list-count">{filtered.length} RESULTS</span>
+          </div>
+
+          <div class="fq-list">
+            {filtered.map((item, idx) => {
+              const isOpen = open === item.id;
+              const catColor = CATEGORY_COLORS[item.category] ?? "#f5a623";
+
+              return (
+                <div
+                  key={item.id}
+                  class={`fq-item${isOpen ? " fq-item--open" : ""}`}
+                  style={{
+                    animationDelay: `${idx * 0.04}s`,
+                  }}
+                >
+                  <button class="fq-question" onClick={() => toggle(item.id)}>
+                    <span class="fq-cat-badge" style={{ background: catColor }}>
+                      {item.category}
+                    </span>
+                    <span class="fq-question-text">{item.question}</span>
+                  </button>
+
+                  {isOpen && (
+                    <div class="fq-answer">
+                      <p>{item.answer}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

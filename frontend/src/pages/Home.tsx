@@ -126,7 +126,7 @@ const CARDS: CardEntry[] = [
     },
     bottom: {
       title: "guides",
-      subtitle: "New to Nexus? We've Got You Covered",
+      subtitle: "New to Kairo? We've Got You Covered",
       color: "#7ed321",
       textColor: "#1a1a1a",
       icon: GuidesBgIcon,

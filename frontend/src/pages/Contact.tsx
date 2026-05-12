@@ -1,5 +1,6 @@
 import type { FunctionalComponent } from "preact";
-import { useState } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
+import { route } from "preact-router";
 import "../styles/Contact.css";
 
 const Contact: FunctionalComponent = () => {
@@ -12,11 +13,21 @@ const Contact: FunctionalComponent = () => {
     message: "",
   });
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") route("/");
+    };
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   const handleChange = (e: Event) => {
     const target = e.target as
       | HTMLInputElement
       | HTMLTextAreaElement
       | HTMLSelectElement;
+
     setForm((prev) => ({ ...prev, [target.name]: target.value }));
   };
 
@@ -27,9 +38,23 @@ const Contact: FunctionalComponent = () => {
 
   return (
     <div class="ct-viewport">
+      <div class="a-topbar">
+        <button class="a-back-btn" onClick={() => route("/")}>
+          <span class="a-back-key">ESC</span>
+          <span class="a-back-label">BACK</span>
+        </button>
+      </div>
+
       <div class="ct-header">
-        <span class="ct-tag">GET IN TOUCH</span>
-        <h1 class="ct-title">CONTACT US</h1>
+        <div class="ct-header-top">
+          <span class="ct-tag">GET IN TOUCH</span>
+          <div class="ct-header-line" />
+        </div>
+        <h1 class="ct-title">
+          CONTACT
+          <br />
+          US.
+        </h1>
         <p class="ct-subtitle">
           Have a question or want to collaborate? We'd love to hear from you.
         </p>
@@ -37,85 +62,54 @@ const Contact: FunctionalComponent = () => {
 
       <div class="ct-grid">
         <div class="ct-info-panel">
+          <div class="ct-info-header">
+            <span class="ct-info-header-label">REACH US VIA</span>
+          </div>
+
           <div class="ct-info-block">
             <span class="ct-info-label">EMAIL</span>
             <span class="ct-info-value">nexus@hackclub.com</span>
+            <div class="ct-info-dot" />
           </div>
+
           <div class="ct-info-block">
             <span class="ct-info-label">DISCORD</span>
             <span class="ct-info-value">discord.gg/nexushack</span>
+            <div class="ct-info-dot" />
           </div>
+
           <div class="ct-info-block">
             <span class="ct-info-label">LOCATION</span>
             <span class="ct-info-value">Global · Remote First</span>
+            <div class="ct-info-dot" />
           </div>
-          <div class="ct-info-block">
+
+          <div class="ct-info-block ct-info-block--last">
             <span class="ct-info-label">RESPONSE TIME</span>
             <span class="ct-info-value">Within 48 Hours</span>
           </div>
-          <div class="ct-deco-box">
-            <svg
-              viewBox="0 0 120 120"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="ct-deco-svg"
-            >
-              <rect
-                x="10"
-                y="30"
-                width="100"
-                height="70"
-                rx="10"
-                fill="#1a1a1a"
-              />
-              <rect
-                x="10"
-                y="30"
-                width="100"
-                height="20"
-                rx="10"
-                fill="#1a1a1a"
-              />
-              <circle cx="35" cy="40" r="6" fill="#f5a623" />
-              <circle cx="55" cy="40" r="6" fill="#f5a623" opacity="0.5" />
-              <circle cx="75" cy="40" r="6" fill="#f5a623" opacity="0.25" />
-              <rect
-                x="25"
-                y="62"
-                width="70"
-                height="8"
-                rx="4"
-                fill="#f0ebe0"
-                opacity="0.3"
-              />
-              <rect
-                x="25"
-                y="78"
-                width="50"
-                height="8"
-                rx="4"
-                fill="#f0ebe0"
-                opacity="0.2"
-              />
-              <rect
-                x="25"
-                y="94"
-                width="60"
-                height="8"
-                rx="4"
-                fill="#f0ebe0"
-                opacity="0.15"
-              />
-            </svg>
+
+          <div class="ct-status-bar">
+            <span class="ct-status-dot" />
+            <span class="ct-status-text">TEAM IS ONLINE</span>
           </div>
         </div>
 
         <div class="ct-form-panel">
+          <div class="ct-form-header">
+            <span class="ct-form-header-label">SEND A MESSAGE</span>
+            <span class="ct-form-step">01 / 01</span>
+          </div>
+
           {submitted ? (
             <div class="ct-success">
-              <span class="ct-success-icon">✓</span>
-              <h2>MESSAGE SENT!</h2>
-              <p>We'll get back to you within 48 hours.</p>
+              <div class="ct-success-badge">
+                <span class="ct-success-icon">✓</span>
+              </div>
+              <div class="ct-success-text">
+                <h2>MESSAGE SENT!</h2>
+                <p>We'll get back to you within 48 hours.</p>
+              </div>
               <button
                 class="ct-btn"
                 onClick={() => {
@@ -123,7 +117,7 @@ const Contact: FunctionalComponent = () => {
                   setForm({ name: "", email: "", subject: "", message: "" });
                 }}
               >
-                SEND ANOTHER
+                SEND ANOTHER →
               </button>
             </div>
           ) : (
@@ -132,7 +126,9 @@ const Contact: FunctionalComponent = () => {
                 <div
                   class={`ct-field${focused === "name" ? " ct-field--focused" : ""}`}
                 >
-                  <label class="ct-label">YOUR NAME</label>
+                  <label class="ct-label">
+                    <span class="ct-label-num">01</span>YOUR NAME
+                  </label>
                   <input
                     class="ct-input"
                     type="text"
@@ -145,10 +141,13 @@ const Contact: FunctionalComponent = () => {
                     onBlur={() => setFocused(null)}
                   />
                 </div>
+
                 <div
                   class={`ct-field${focused === "email" ? " ct-field--focused" : ""}`}
                 >
-                  <label class="ct-label">EMAIL ADDRESS</label>
+                  <label class="ct-label">
+                    <span class="ct-label-num">02</span>EMAIL ADDRESS
+                  </label>
                   <input
                     class="ct-input"
                     type="email"
@@ -166,7 +165,9 @@ const Contact: FunctionalComponent = () => {
               <div
                 class={`ct-field${focused === "subject" ? " ct-field--focused" : ""}`}
               >
-                <label class="ct-label">SUBJECT</label>
+                <label class="ct-label">
+                  <span class="ct-label-num">03</span>SUBJECT
+                </label>
                 <select
                   class="ct-input ct-select"
                   name="subject"
@@ -190,7 +191,9 @@ const Contact: FunctionalComponent = () => {
               <div
                 class={`ct-field${focused === "message" ? " ct-field--focused" : ""}`}
               >
-                <label class="ct-label">MESSAGE</label>
+                <label class="ct-label">
+                  <span class="ct-label-num">04</span>MESSAGE
+                </label>
                 <textarea
                   class="ct-input ct-textarea"
                   name="message"
@@ -204,9 +207,14 @@ const Contact: FunctionalComponent = () => {
                 />
               </div>
 
-              <button class="ct-btn" type="submit">
-                SEND MESSAGE →
-              </button>
+              <div class="ct-form-footer">
+                <p class="ct-privacy-note">
+                  We never share your information with third parties.
+                </p>
+                <button class="ct-btn" type="submit">
+                  SEND MESSAGE →
+                </button>
+              </div>
             </form>
           )}
         </div>
