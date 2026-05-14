@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import "./app.css";
 
-// Import your own pages here as you build them:
 import Events from "./pages/Events";
 import About from "./pages/About";
 import Guides from "./pages/Guides";
