@@ -120,9 +120,8 @@ const LEVEL_ORDER = ["BEGINNER", "INTERMEDIATE", "ADVANCED"];
 
 const ProgressRing: FunctionalComponent<{
   steps: number;
-  color: string;
   isDark: boolean;
-}> = ({ steps, color, isDark }) => {
+}> = ({ steps, isDark }) => {
   const max = 10;
   const pct = steps / max;
   const r = 18;
@@ -232,11 +231,7 @@ const GuideCard: FunctionalComponent<{
 
       <div class="gd-card-footer">
         <div class="gd-card-meta">
-          <ProgressRing
-            steps={guide.steps}
-            color={guide.color}
-            isDark={isDark}
-          />
+          <ProgressRing steps={guide.steps} isDark={isDark} />
           <div class="gd-meta-info">
             <span
               class="gd-meta-pill"

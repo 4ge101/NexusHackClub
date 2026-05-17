@@ -720,3 +720,17 @@
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0 #7ed321;
 }
+
+@media (max-width: 768px){
+  .gd-topbar{
+    display: block;
+  }
+
+  .gd-topbar-right{
+    display: block;
+  }
+
+  .gd-search-wrap{
+    margin: 20px 0;
+  }
+}

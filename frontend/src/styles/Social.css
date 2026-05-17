@@ -11,20 +11,16 @@
   left: 4%;
   box-sizing: border-box;
 }
-
 .s-viewport::-webkit-scrollbar {
   width: 5px;
 }
-
 .s-viewport::-webkit-scrollbar-track {
   background: transparent;
 }
-
 .s-viewport::-webkit-scrollbar-thumb {
   background: #1a1a1a25;
   border-radius: 999px;
 }
-
 .s-topbar {
   flex-shrink: 0;
   margin-bottom: 28px;
@@ -34,7 +30,6 @@
   background: #f0ebe0;
   z-index: 10;
 }
-
 .s-back-btn {
   display: inline-flex;
   align-items: center;
@@ -50,18 +45,15 @@
     box-shadow 0.15s,
     background 0.15s;
 }
-
 .s-back-btn:hover {
   transform: translate(-2px, -2px);
   box-shadow: 7px 7px 0px #1a1a1a;
   background: #ffa936;
 }
-
 .s-back-btn:active {
   transform: translate(1px, 1px);
   box-shadow: 1px 1px 0px #1a1a1a;
 }
-
 .s-back-key {
   display: inline-flex;
   align-items: center;
@@ -75,7 +67,6 @@
   color: #1a1a1a;
   letter-spacing: 0.05em;
 }
-
 .s-back-label {
   font-size: 30px;
   font-weight: 900;
@@ -83,19 +74,16 @@
   color: #1a1a1a;
   text-transform: uppercase;
 }
-
 .s-content {
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
-
 .s-hero {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-
 .s-title {
   font-family: "Boldonse", system-ui;
   font-weight: 900;
@@ -104,26 +92,24 @@
   line-height: 0.88;
   margin: 0;
   white-space: nowrap;
-  font-size: clamp(52px, 9.5vw, 130px);
+  font-size: clamp(32px, 9.5vw, 130px);
   letter-spacing: -3px;
 }
-
 .s-lead {
   font-family: "Arial", sans-serif;
-  font-size: clamp(16px, 1.5vw, 20px);
+  font-size: clamp(14px, 1.5vw, 20px);
   font-weight: 500;
   color: #1a1a1a;
   margin: 0;
   opacity: 0.7;
 }
-
 .s-grid {
   display: flex;
   flex-direction: column;
   gap: 14px;
   max-width: 620px;
+  width: 100%;
 }
-
 .s-card {
   display: flex;
   align-items: center;
@@ -138,17 +124,14 @@
     box-shadow 0.15s;
   cursor: pointer;
 }
-
 .s-card:hover {
   transform: translate(-3px, -3px);
   box-shadow: 9px 9px 0px #1a1a1a;
 }
-
 .s-card:active {
   transform: translate(1px, 1px);
   box-shadow: 2px 2px 0px #1a1a1a;
 }
-
 .s-icon-placeholder {
   width: 52px;
   height: 52px;
@@ -160,7 +143,6 @@
   flex-shrink: 0;
   background: rgba(255, 255, 255, 0.2);
 }
-
 .s-icon {
   width: 28px;
   height: 28px;
@@ -168,14 +150,13 @@
   display: block;
   filter: contrast(120%) saturate(120%);
 }
-
 .s-card-info {
   display: flex;
   flex-direction: column;
   gap: 3px;
   flex: 1;
+  min-width: 0;
 }
-
 .s-card-name {
   font-family: "Boldonse", system-ui;
   font-size: clamp(18px, 2vw, 26px);
@@ -184,7 +165,6 @@
   margin: 0;
   line-height: 1;
 }
-
 .s-card-handle {
   font-family: "Arial", sans-serif;
   font-size: clamp(12px, 1.1vw, 15px);
@@ -192,7 +172,6 @@
   margin: 0;
   opacity: 0.65;
 }
-
 .s-arrow {
   font-size: clamp(22px, 2.2vw, 32px);
   font-weight: 900;
@@ -200,8 +179,52 @@
   transition: transform 0.15s;
   opacity: 0.8;
 }
-
 .s-card:hover .s-arrow {
   transform: translate(3px, -3px);
   opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .s-viewport {
+    width: 100%;
+    left: 0;
+    padding: 12px 20px 48px;
+  }
+  .s-title {
+    white-space: normal;
+    letter-spacing: -1px;
+    font-size: 8.5vw;
+  }
+  .s-back-btn {
+    padding: 10px 16px;
+  }
+  .s-back-key {
+    font-size: 16px;
+    padding: 8px 7px;
+  }
+  .s-back-label {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .s-viewport {
+    padding: 10px 60px 40px;
+  }
+  .s-card {
+    padding: 16px 16px;
+    gap: 14px;
+    border-radius: 16px;
+  }
+  .s-icon-placeholder {
+    width: 44px;
+    height: 44px;
+  }
+  .s-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .s-content {
+    gap: 28px;
+  }
 }
